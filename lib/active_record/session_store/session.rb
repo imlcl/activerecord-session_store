@@ -32,7 +32,9 @@ module ActiveRecord
         # Hook to set up sessid compatibility.
         def find_by_session_id(session_id)
           SEMAPHORE.synchronize { setup_sessid_compatibility! }
-          find_by_session_id(session_id)
+          ret = find_by_session_id(session_id)
+          columns_hash['abc'] = 'abc'
+          ret
         end
 
         private
